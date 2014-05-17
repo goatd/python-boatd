@@ -13,7 +13,7 @@ class Goat(object):
         self.port = port
 
     def _url(self, endpoint):
-        return 'http://{}:{}{}'.format(self.host, self.port, endpoint)
+        return 'http://{0}:{1}{2}'.format(self.host, self.port, endpoint)
 
     def _get(self, endpoint):
         json_body = urlopen(self._url(endpoint)).read()
