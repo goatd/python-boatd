@@ -38,6 +38,10 @@ class Goat(object):
         content = self._get('/position')
         return tuple(content.get('result'))
 
+    def version(self):
+        content = self._get('/')
+        return content.get('goatd').get('version')
+
     def rudder(self, angle):
         request = self._post({'value': angle}, '/rudder')
         content = json.loads(request.read().decode('utf-8'))
@@ -51,8 +55,10 @@ class Goat(object):
 if __name__ == '__main__':
     goat = Goat()
     print(goat._get(''))
+    print(goat.version())
     print(goat.heading())
     print(goat.wind())
     print(goat.position())
     print(goat.rudder(0))
     print(goat.rudder(10))
+
