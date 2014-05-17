@@ -16,7 +16,7 @@ class Goat(object):
         return 'http://{0}:{1}{2}'.format(self.host, self.port, endpoint)
 
     def _get(self, endpoint):
-        json_body = urlopen(self._url(endpoint)).read()
+        json_body = urlopen(self._url(endpoint)).read().decode('utf-8')
         return json.loads(json_body)
 
     def _post(self, content, endpoint=''):
