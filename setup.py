@@ -9,6 +9,7 @@ setup(
     license='GPL',
     keywords='goat sailing wrapper rest',
     url='https://github.com/goatd/python-goatd',
+    packages=['goatd_client'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
