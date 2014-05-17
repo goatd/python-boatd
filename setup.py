@@ -10,6 +10,8 @@ setup(
     keywords='goat sailing wrapper rest',
     url='https://github.com/goatd/python-goatd',
     packages=['goatd_client'],
+    test_requires=['nose', 'HTTPretty'],
+    test_suite='nose.collector',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
