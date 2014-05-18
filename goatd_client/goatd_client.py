@@ -5,7 +5,11 @@ try:
 except ImportError:
     from urllib2 import urlopen, Request
 
+from collections import namedtuple
+
 import json
+
+Wind = namedtuple('Wind', ['direction', 'speed'])
 
 class Goat(object):
     def __init__(self, host='localhost', port=2222):
@@ -26,18 +30,22 @@ class Goat(object):
         request = Request(url, post_content, headers)
         return urlopen(request)
 
+    @property
     def heading(self):
         content = self._get('/heading')
         return content.get('result')
 
+    @property
     def wind(self):
         content = self._get('/wind')
-        return content.get('result')
+        return Wind(content.get('direction'), content.get('speed'))
 
+    @property
     def position(self):
         content = self._get('/position')
         return tuple(content.get('result'))
 
+    @property
     def version(self):
         content = self._get('/')
         return content.get('goatd').get('version')
