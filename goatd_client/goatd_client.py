@@ -63,10 +63,10 @@ class Goat(object):
 if __name__ == '__main__':
     goat = Goat()
     print(goat._get(''))
-    print(goat.version())
-    print(goat.heading())
-    print(goat.wind())
-    print(goat.position())
+    print(goat.version)
+    print(goat.heading)
+    print(goat.wind)
+    print(goat.position)
     print(goat.rudder(0))
     print(goat.rudder(10))
 
