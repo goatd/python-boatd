@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+'''
+goatdctl - goatd control
+
+Usage:
+    goatdctl stop
+    goatdctl heading
+    goatdctl position
+    goatdctl rudder <angle>
+    goatdctl sail <angle>
+
+Options:
+    -h --help     Show this screen.
+    --version     Show goatd version
+
+'''
+
+from docopt import docopt
+
+from goatd_client import Goat
+
+if __name__ == '__main__':
+    goat = Goat()
+    args = docopt(__doc__, version=goat.version, options_first=True)
+    print args
+    if args['rudder']:
+        print 'setting rudder to', args['<angle>']
+        goat.rudder(float(args['<angle>']))
