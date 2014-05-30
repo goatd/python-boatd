@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='goatd_client',
-    version='0.1.2',
+    version='0.1.3',
     author='Louis Taylor',
     author_email='kragniz@gmail.com',
     description=('Python wrapper for the goatd API, used to write behavior scripts.'),
