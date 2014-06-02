@@ -3,6 +3,7 @@
 goatdctl - goatd control
 
 Usage:
+    goatdctl info
     goatdctl stop
     goatdctl heading
     goatdctl position
@@ -22,7 +23,6 @@ from goatd_client import Goat
 if __name__ == '__main__':
     goat = Goat()
     args = docopt(__doc__, version=goat.version, options_first=True)
-    print args
     if args['rudder']:
         print 'setting rudder to', args['<angle>']
         goat.rudder(float(args['<angle>']))
