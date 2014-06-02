@@ -6,6 +6,7 @@ Usage:
     goatdctl stop
     goatdctl heading
     goatdctl position
+    goatdctl spin
     goatdctl rudder <angle>
     goatdctl sail <angle>
 
@@ -26,3 +27,13 @@ if __name__ == '__main__':
     if args['rudder']:
         print 'setting rudder to', args['<angle>']
         goat.rudder(float(args['<angle>']))
+
+    if args['sail']:
+        print 'setting sail to', args['<angle>']
+        goat.sail(float(args['<angle>']))
+
+    if args['spin']:
+        import time
+        for i in range(90):
+            a = 45 - (i)
+            goat.rudder(a)
