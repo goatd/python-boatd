@@ -1,4 +1,7 @@
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 setup(
     name='goatd_client',
@@ -12,6 +15,9 @@ setup(
     url='https://github.com/goatd/python-goatd',
     packages=['goatd_client'],
     requires=['docopt'],
+    install_requires=[
+        'docopt >= 0.6'
+        ],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
