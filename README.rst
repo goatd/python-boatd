@@ -2,9 +2,8 @@
 python-goatd
 ============
 
-.. image:: https://pypip.in/v/goatd_client/badge.png
-    :target: https://pypi.python.org/pypi/goatd_client
-    :alt: Latest PyPI version
+.. image:: https://badge.fury.io/py/goatd_client.svg
+    :target: http://badge.fury.io/py/goatd_client
 
 .. image:: https://travis-ci.org/goatd/python-goatd.png?branch=master
     :target: https://travis-ci.org/goatd/python-goatd
