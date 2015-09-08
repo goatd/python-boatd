@@ -35,7 +35,7 @@ Return a tuple in the form ``(latitude, longitude)``
 Return the version of goatd
 
 ``wind``:
-Return the direction of the wind in degrees
+Return a tuple in the form ``(direction, speed)``. This contains the direction of the wind in degrees and the speed the wind is blowing in knots.
 
 **methods**
 -----------
