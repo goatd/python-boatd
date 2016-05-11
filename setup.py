@@ -5,7 +5,7 @@ except ImportError:
 
 setup(
     name='python-goatdclient',
-    version='0.1.4',
+    version='0.2.0',
     author='Louis Taylor',
     author_email='louis@kragniz.eu',
     description=('Python wrapper for the goatd API, used to write behavior scripts.'),
