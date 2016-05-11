@@ -27,6 +27,7 @@ if __name__ == '__main__':
 
     help_parser = subparsers.add_parser('help')
     info_parser = subparsers.add_parser('status')
+    quit_parser = subparsers.add_parser('quit')
     heading_parser = subparsers.add_parser('heading')
     position_parser = subparsers.add_parser('position')
     spin_parser = subparsers.add_parser('spin')
@@ -52,6 +53,9 @@ if __name__ == '__main__':
             sys.exit(1)
         print('goatd version \'{}\' responding to requests on {}'.format(v,
               goat.goatd_url('/')))
+
+    if opts.command == 'quit':
+        goat.quit()
 
     if opts.command == 'heading':
         print('heading: {}'.format(goat.heading))
