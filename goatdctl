@@ -55,6 +55,9 @@ if __name__ == '__main__':
         print('goatd version \'{}\' responding to requests on {}'.format(v,
               goat.goatd_url('/')))
 
+    if opts.command == 'heading':
+        print('heading: {}'.format(goat.heading))
+
     if opts.command == 'rudder':
         print('setting rudder to', opts.angle)
         goat.rudder(float(opts.angle))

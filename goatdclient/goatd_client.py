@@ -20,13 +20,13 @@ class Goat(object):
         self.host = host
         self.port = port
 
-    def _url(self, endpoint):
+    def goatd_url(self, endpoint):
         '''Return a formatted url pointing at `endpoint` on the goatd server'''
         return 'http://{0}:{1}{2}'.format(self.host, self.port, endpoint)
 
     def _get(self, endpoint):
         '''Return the result of a GET request to `endpoint` on goatd'''
-        json_body = urlopen(self._url(endpoint)).read().decode('utf-8')
+        json_body = urlopen(self.goatd_url(endpoint)).read().decode('utf-8')
         return json.loads(json_body)
 
     def _post(self, content, endpoint=''):
@@ -34,7 +34,7 @@ class Goat(object):
         Issue a POST request with `content` as the body to `endpoint` and
         return the result.
         '''
-        url = self._url(endpoint)
+        url = self.goatd_url(endpoint)
         post_content = json.dumps(content).encode('utf-8')
         headers = {'Content-Type': 'application/json'}
         request = Request(url, post_content, headers)
@@ -43,8 +43,8 @@ class Goat(object):
     @property
     def heading(self):
         '''Return the current heading of the goat in degrees'''
-        content = self._get('/heading')
-        return content.get('result')
+        content = self._get('/goat')
+        return float(content.get('heading'))
 
     @property
     def wind(self):
