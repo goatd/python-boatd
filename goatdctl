@@ -17,22 +17,39 @@ Options:
 
 '''
 
-from docopt import docopt
+import argparse
 
-from goatd_client import Goat
+from goatdclient import Goat
 
 if __name__ == '__main__':
+    arger = argparse.ArgumentParser()
+    subparsers = arger.add_subparsers(dest='command')
+
+    info_parser = subparsers.add_parser('info')
+    stop_parser = subparsers.add_parser('stop')
+    heading_parser = subparsers.add_parser('heading')
+    position_parser = subparsers.add_parser('position')
+    spin_parser = subparsers.add_parser('spin')
+
+    rudder_parser = subparsers.add_parser('rudder')
+    rudder_parser.add_argument('angle')
+
+    sail_parser = subparsers.add_parser('sail')
+    sail_parser.add_argument('angle')
+
+    opts = arger.parse_args()
+
     goat = Goat()
-    args = docopt(__doc__, version=goat.version, options_first=True)
-    if args['rudder']:
-        print 'setting rudder to', args['<angle>']
-        goat.rudder(float(args['<angle>']))
 
-    if args['sail']:
-        print 'setting sail to', args['<angle>']
-        goat.sail(float(args['<angle>']))
+    if opts.command == 'rudder':
+        print('setting rudder to', opts.angle)
+        goat.rudder(float(opts.angle))
 
-    if args['spin']:
+    if opts.command == 'sail':
+        print('setting sail to', opts.angle)
+        goat.sail(float(opts.angle))
+
+    if opts.command == 'spin':
         import time
         for i in range(90):
             a = 45 - (i)
