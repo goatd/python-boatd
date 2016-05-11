@@ -58,6 +58,9 @@ if __name__ == '__main__':
     if opts.command == 'heading':
         print('heading: {}'.format(goat.heading))
 
+    if opts.command == 'position':
+        print('position: {0:.9f}, {0:.9f}'.format(*goat.position))
+
     if opts.command == 'rudder':
         print('setting rudder to', opts.angle)
         goat.rudder(float(opts.angle))
