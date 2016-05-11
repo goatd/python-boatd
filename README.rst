@@ -14,7 +14,7 @@ scripts.
 Installing
 ==========
 
-``$ pip install goatd_client``
+``$ pip install python-goatdclient``
 
 class **Goat**
 ==============
