@@ -3,8 +3,7 @@
 goatdctl - goatd control
 
 Usage:
-    goatdctl info
-    goatdctl stop
+    goatdctl status
     goatdctl heading
     goatdctl position
     goatdctl spin
@@ -28,7 +27,6 @@ if __name__ == '__main__':
 
     help_parser = subparsers.add_parser('help')
     info_parser = subparsers.add_parser('status')
-    stop_parser = subparsers.add_parser('stop')
     heading_parser = subparsers.add_parser('heading')
     position_parser = subparsers.add_parser('position')
     spin_parser = subparsers.add_parser('spin')
