@@ -25,6 +25,7 @@ if __name__ == '__main__':
     arger = argparse.ArgumentParser()
     subparsers = arger.add_subparsers(dest='command')
 
+    help_parser = subparsers.add_parser('help')
     info_parser = subparsers.add_parser('info')
     stop_parser = subparsers.add_parser('stop')
     heading_parser = subparsers.add_parser('heading')
@@ -40,6 +41,10 @@ if __name__ == '__main__':
     opts = arger.parse_args()
 
     goat = Goat()
+
+
+    if opts.command == 'help':
+        print(__doc__)
 
     if opts.command == 'rudder':
         print('setting rudder to', opts.angle)
