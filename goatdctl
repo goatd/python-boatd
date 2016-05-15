@@ -20,6 +20,7 @@ import argparse
 import sys
 
 from goatdclient import Goat
+from goatdclient import Behaviour
 
 if __name__ == '__main__':
     arger = argparse.ArgumentParser()
@@ -28,6 +29,12 @@ if __name__ == '__main__':
     help_parser = subparsers.add_parser('help')
     info_parser = subparsers.add_parser('status')
     quit_parser = subparsers.add_parser('quit')
+
+    behaviour_list_parser = subparsers.add_parser('behaviour-list')
+    behaviour_start_parser = subparsers.add_parser('behaviour-start')
+    behaviour_stop_parser = subparsers.add_parser('behaviour-stop')
+    behaviour_start_parser.add_argument('behaviour')
+
     heading_parser = subparsers.add_parser('heading')
     position_parser = subparsers.add_parser('position')
     spin_parser = subparsers.add_parser('spin')
@@ -52,10 +59,25 @@ if __name__ == '__main__':
             print('Problem talking to goatd: "{}"'.format(e))
             sys.exit(1)
         print('goatd version \'{}\' responding to requests on {}'.format(v,
-              goat.goatd_url('/')))
+              goat.goatd.url('/')))
 
     if opts.command == 'quit':
         goat.quit()
+
+    if opts.command == 'behaviour-list':
+        behaviour = Behaviour()
+        for name in behaviour.list():
+            print(name)
+
+    if opts.command == 'behaviour-start':
+        behaviour = Behaviour()
+        name = opts.behaviour
+        message = behaviour.start(name)
+        print(message)
+
+    if opts.command == 'behaviour-stop':
+        behaviour = Behaviour()
+        behaviour.stop()
 
     if opts.command == 'heading':
         print('heading: {}'.format(goat.heading))
