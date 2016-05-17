@@ -2,6 +2,7 @@ from httpretty import HTTPretty, httprettified
 
 from goatdclient import Goat
 
+
 @httprettified
 class TestGoatdClient(object):
     def setup(self):

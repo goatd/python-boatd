@@ -127,4 +127,3 @@ if __name__ == '__main__':
     print(goat.position)
     print(goat.rudder(0))
     print(goat.rudder(10))
-
