@@ -1,9 +1,16 @@
 language: python
 python:
-  - "2.6"
-  - "2.7"
-  - "3.2"
-  - "3.3"
+- '2.7'
+- '3.3'
+- '3.4'
+- '3.5'
 install:
-  - "pip install -r test-requirements.txt"
+- pip install -r test-requirements.txt
 script: nosetests
+deploy:
+  provider: pypi
+  user: kragniz
+  on:
+    tags: true
+  password:
+    secure: SY0QJVFcgqhwo0pnBq8GMlZ9Nkxj0wjUPzQYmSNB9shStXHM7oA3eXUWBFUW3pKn2Ccqx+Ie/wTYIkCLlCxw9KsVNMc8Ga/+hmLuiWSfX11sl06zSNv0m+QDIu0Y/Yp3FpnXMeAzq0UcytiKo0pnIsqTEzSFvGr95YStRbQyyPQ=
