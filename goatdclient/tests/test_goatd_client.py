@@ -1,6 +1,6 @@
 from httpretty import HTTPretty, httprettified
 
-from goatd_client import Goat
+from goatdclient import Goat
 
 @httprettified
 class TestGoatdClient(object):

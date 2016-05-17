@@ -2,8 +2,8 @@
 python-goatd
 ============
 
-.. image:: https://badge.fury.io/py/goatd_client.svg
-    :target: http://badge.fury.io/py/goatd_client
+.. image:: https://badge.fury.io/py/python-goatdclient.svg
+    :target: http://badge.fury.io/py/python-goatdclient
 
 .. image:: https://travis-ci.org/goatd/python-goatd.png?branch=master
     :target: https://travis-ci.org/goatd/python-goatd
