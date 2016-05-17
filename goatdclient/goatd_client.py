@@ -105,9 +105,16 @@ class Behaviour(object):
         return self.goatd.get('/behaviours')
 
     def list(self):
+        '''Return a list of the available behaviours to run.'''
         return list(self._get_behaviour_data().get('behaviours').keys())
 
     def start(self, name):
+        '''
+        End the current behaviour and run a named behaviour.
+
+        :param name: the name of the behaviour to run
+        :type name: str
+        '''
         d = self.goatd.post({'current': name}, endpoint='/behaviours')
         current = d.get('current')
         if current is not None:
@@ -116,6 +123,9 @@ class Behaviour(object):
             return 'no behaviour running'
 
     def stop(self):
+        '''
+        Stop the current behaviour.
+        '''
         self.start(None)
 
 
