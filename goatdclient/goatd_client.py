@@ -148,6 +148,10 @@ class ConvenienceGoat(object):
 
 
 def Goat(convenience=False, *args, **kwargs):
+    '''
+    Return a Goat instance. If ``convenience`` is True, return an instance of
+    ``ConvenienceGoat``, otherwise return ``LegacyGoat``.
+    '''
     if convenience is True:
         return ConvenienceGoat(*args, **kwargs)
     else:
