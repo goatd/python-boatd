@@ -6,7 +6,6 @@ except ImportError:
     from urllib2 import urlopen, Request
 
 from collections import namedtuple
-
 import json
 
 Wind = namedtuple('Wind', ['direction', 'speed'])
@@ -48,7 +47,56 @@ class Goatd(object):
         print(content)
 
 
-class Goat(object):
+class LegacyGoat(object):
+   '''
+   A goat controlled by goatd. This is the legacy goat interface for backwards
+   compatibility. Deprecated.
+   '''
+
+    def __init__(self, goatd=None):
+        if goatd is None:
+            self.goatd = Goatd()
+        else:
+            self.goatd = goatd
+
+    @property
+    def heading(self):
+        '''Return the current heading of the goat in degrees'''
+        content = self.goatd.get('/goat')
+        return float(content.get('heading'))
+
+    @property
+    def wind(self):
+        '''Return the direction of the wind in degrees'''
+        content = self.goatd.get('/wind')
+        return Wind(content.get('direction'), content.get('speed'))
+
+    @property
+    def position(self):
+        '''Return a tuple in the form `(latitude, longitude)`'''
+        content = self.goatd.get('/goat')
+        return tuple(content.get('position'))
+
+    @property
+    def version(self):
+        '''Return the version of goatd'''
+        content = self.goatd.get('/')
+        return content.get('goatd').get('version')
+
+    def rudder(self, angle):
+        '''Set the angle of the rudder to be `angle` degrees'''
+        request = self.goatd.post({'value': angle}, '/rudder')
+        content = json.loads(request.read().decode('utf-8'))
+        return content.get('result')
+
+    def sail(self, angle):
+        '''Set the angle of the sail to `angle` degrees'''
+        request = self.goatd.post({'value': angle}, '/sail')
+        content = json.loads(request.read().decode('utf-8'))
+        return content.get('result')
+
+
+class ConvenienceGoat(object):
     '''A goat controlled by goatd'''
 
     def __init__(self, goatd=None):
@@ -92,6 +140,13 @@ class Goat(object):
         request = self.goatd.post({'value': angle}, '/sail')
         content = json.loads(request.read().decode('utf-8'))
         return content.get('result')
+
+
+def Goat(convenience=False, *args, **kwargs):
+    if convenience is True:
+        return ConvenienceGoat(*args, **kwargs)
+    else:
+        return LegacyGoat(*args, **kwargs)
 
 
 class Behaviour(object):
