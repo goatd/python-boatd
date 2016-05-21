@@ -1,5 +1,6 @@
 import math
 
+
 class Bearing(object):
     '''
     An angle between 0 and 360 degrees
