@@ -59,3 +59,9 @@ class Bearing(object):
 
     def __int__(self):
         return int(self._degrees)
+
+    def __neg__(self):
+        return Bearing(-float(self))
+
+    def __abs__(self):
+        return Bearing(abs(float(self)))
