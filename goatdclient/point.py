@@ -33,6 +33,10 @@ class Point(object):
         """Return a string representation of the point"""
         return '{0:0.2f}N, {1:0.2f}W'.format(*list(self))
 
+    def __repr__(self):
+        return '<{0}.{1} ({2}) object at {3}>'.format(
+              self.__module__, type(self).__name__, str(self), hex(id(self)))
+
     @property
     def lat(self):
         """Return the latitude in degrees"""
