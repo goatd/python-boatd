@@ -134,17 +134,17 @@ class ConvenienceGoat(object):
         content = self.goatd.get('/')
         return content.get('goatd').get('version')
 
-    def rudder(self, angle):
+    def set_rudder(self, angle):
         '''Set the angle of the rudder to be `angle` degrees'''
+        angle = float(angle)
         request = self.goatd.post({'value': float(angle)}, '/rudder')
-        content = json.loads(request.read().decode('utf-8'))
-        return content.get('result')
+        return request.get('result')
 
-    def sail(self, angle):
+    def set_sail(self, angle):
         '''Set the angle of the sail to `angle` degrees'''
+        angle = float(angle)
         request = self.goatd.post({'value': float(angle)}, '/sail')
-        content = json.loads(request.read().decode('utf-8'))
-        return content.get('result')
+        return request.get('result')
 
 
 def Goat(convenience=False, *args, **kwargs):
