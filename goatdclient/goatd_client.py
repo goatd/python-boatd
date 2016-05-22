@@ -89,15 +89,15 @@ class LegacyGoat(object):
 
     def rudder(self, angle):
         '''Set the angle of the rudder to be `angle` degrees'''
+        angle = float(angle)
         request = self.goatd.post({'value': angle}, '/rudder')
-        content = json.loads(request.read().decode('utf-8'))
-        return content.get('result')
+        return request.get('result')
 
     def sail(self, angle):
         '''Set the angle of the sail to `angle` degrees'''
+        angle = float(angle)
         request = self.goatd.post({'value': angle}, '/sail')
-        content = json.loads(request.read().decode('utf-8'))
-        return content.get('result')
+        return request.get('result')
 
 
 class ConvenienceGoat(object):
