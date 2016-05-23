@@ -35,6 +35,18 @@ class Bearing(object):
     def degrees(self):
         return self._degrees
 
+    def delta(self, other):
+        '''
+        Return the error between this and another bearing. This will be an
+        angle, positive or negative depending on the direction of the error.
+        '''
+        difference = float(other) - float(self)
+        while difference < -180:
+            difference += 360
+        while difference > 180:
+            difference -= 360
+        return difference
+
     def __float__(self):
         return self._degrees
 
