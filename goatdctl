@@ -62,7 +62,7 @@ if __name__ == '__main__':
               goat.goatd.url('/')))
 
     if opts.command == 'quit':
-        goat.quit()
+        goat.goatd.quit()
 
     if opts.command == 'behaviour-list':
         behaviour = Behaviour()
