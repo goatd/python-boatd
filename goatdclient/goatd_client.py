@@ -179,8 +179,8 @@ class Behaviour(object):
         :param name: the name of the behaviour to run
         :type name: str
         '''
-        d = self.goatd.post({'current': name}, endpoint='/behaviours')
-        current = d.get('current')
+        d = self.goatd.post({'active': name}, endpoint='/behaviours')
+        current = d.get('active')
         if current is not None:
             return 'started {}'.format(current)
         else:
