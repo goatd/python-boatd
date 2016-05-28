@@ -61,7 +61,15 @@ class Point(object):
         return math.radians(self.long)
 
     def distance_to(self, point):
-        '''Return the distance between two points in meters'''
+        '''
+        Return the distance between this point and another point in meters.
+
+        :param point: Point to measure distance to
+        :type point: Point
+
+        :returns: The distance to the other point
+        :rtype: float
+        '''
         angle = math.acos(
             sin(self.lat_radians) * sin(point.lat_radians) +
             cos(self.lat_radians) * cos(point.lat_radians) *
@@ -70,7 +78,15 @@ class Point(object):
         return angle * EARTH_RADIUS
 
     def bearing_to(self, point):
-        '''Return the bearing to another point'''
+        '''
+        Return the bearing to another point.
+
+        :param point: Point to measure bearing to
+        :type point: Point
+
+        :returns: The bearing to the other point
+        :rtype: Bearing
+        '''
         delta_long = point.long_radians - self.long_radians
         y = sin(delta_long) * cos(point.lat_radians)
         x = (
