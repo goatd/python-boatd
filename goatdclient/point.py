@@ -99,24 +99,25 @@ class Point(object):
     def cross_track_distance(self, start_point, end_point):
         '''
         Return the cross track distance from this point to the line between two
-        points.
+        points::
 
-                       * end_point
+                        * end_point
+                       /
                       /
-                     /
-                    /   * this point
+                     /   * this point
+                    /
                    /
-                  /
-                 *
-            start_point
+                  *
+             start_point
 
 
-        :param point1: First point on the line
-        :type point1: Point
-        :param point2: Second point on the line
-        :type point2: Point
+        :param start_point: First point on the line
+        :type start_point: Point
+        :param end_point: Second point on the line
+        :type end_point: Point
 
-        :returns: The distance to the line between ``point1`` and ``point2``
+        :returns: The distance to the line between ``start_point`` and
+                  ``end_point``
         :rtype: float
         '''
 

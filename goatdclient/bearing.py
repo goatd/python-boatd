@@ -38,7 +38,14 @@ class Bearing(object):
     def delta(self, other):
         '''
         Return the error between this and another bearing. This will be an
-        angle, positive or negative depending on the direction of the error.
+        angle in degrees, positive or negative depending on the direction of
+        the error.
+
+        :param other: bearing to compare to
+        :type other: Bearing
+
+        :returns: error angle
+        :rtype: float
         '''
         difference = float(other) - float(self)
         while difference < -180:

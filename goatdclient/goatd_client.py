@@ -62,19 +62,34 @@ class Goat(object):
 
     @property
     def heading(self):
-        '''Return the current heading of the goat in degrees'''
+        '''
+        Return the current heading of the goat in degrees.
+
+        :returns: current bearing
+        :rtype: Bearing
+        '''
         content = self.goatd.get('/goat')
         return Bearing(float(content.get('heading')))
 
     @property
     def wind(self):
-        '''Return the direction of the wind in degrees'''
+        '''
+        Return the direction of the wind in degrees.
+
+        :returns: wind direction bearing
+        :rtype: Bearing
+        '''
         content = self.goatd.get('/wind')
         return Wind(Bearing(content.get('direction')), content.get('speed'))
 
     @property
     def position(self):
-        '''Return a tuple in the form `(latitude, longitude)`'''
+        '''
+        Return the current position of the goat.
+
+        :returns: current position
+        :rtype: Point
+        '''
         content = self.goatd.get('/goat')
         lat, lon = content.get('position')
         return Point(lat, lon)
@@ -86,13 +101,23 @@ class Goat(object):
         return content.get('goatd').get('version')
 
     def set_rudder(self, angle):
-        '''Set the angle of the rudder to be `angle` degrees'''
+        '''
+        Set the angle of the rudder to be `angle` degrees.
+
+        :param angle: rudder angle
+        :type angle: float between -90 and 90
+        '''
         angle = float(angle)
         request = self.goatd.post({'value': float(angle)}, '/rudder')
         return request.get('result')
 
     def set_sail(self, angle):
-        '''Set the angle of the sail to `angle` degrees'''
+        '''
+        Set the angle of the sail to `angle` degrees
+
+        :param angle: sail angle
+        :type angle: float between -90 and 90
+        '''
         angle = float(angle)
         request = self.goatd.post({'value': float(angle)}, '/sail')
         return request.get('result')
