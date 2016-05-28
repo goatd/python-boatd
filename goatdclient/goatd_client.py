@@ -51,7 +51,7 @@ class Goatd(object):
         print(content)
 
 
-class ConvenienceGoat(object):
+class Goat(object):
     '''A goat controlled by goatd'''
 
     def __init__(self, goatd=None):
@@ -96,17 +96,6 @@ class ConvenienceGoat(object):
         angle = float(angle)
         request = self.goatd.post({'value': float(angle)}, '/sail')
         return request.get('result')
-
-
-def Goat(convenience=False, *args, **kwargs):
-    '''
-    Return a Goat instance. If ``convenience`` is True, return an instance of
-    ``ConvenienceGoat``, otherwise return ``LegacyGoat``.
-    '''
-    if convenience is True:
-        return ConvenienceGoat(*args, **kwargs)
-    else:
-        raise ImportError
 
 
 class Behaviour(object):
