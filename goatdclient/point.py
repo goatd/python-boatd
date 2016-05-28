@@ -96,6 +96,37 @@ class Point(object):
         radians = math.atan2(y, x)
         return Bearing.from_radians(radians)
 
+    def cross_track_distance(self, start_point, end_point):
+        '''
+        Return the cross track distance from this point to the line between two
+        points.
+
+                       * end_point
+                      /
+                     /
+                    /   * this point
+                   /
+                  /
+                 *
+            start_point
+
+
+        :param point1: First point on the line
+        :type point1: Point
+        :param point2: Second point on the line
+        :type point2: Point
+
+        :returns: The distance to the line between ``point1`` and ``point2``
+        :rtype: float
+        '''
+
+	dist = start_point.distance_to(self)
+	bearing_to_end = start_point.bearing_to(end_point).radians
+	bearing_to_point = start_point.bearing_to(self).radians
+	return math.asin(math.sin(dist / EARTH_RADIUS) * \
+               math.sin(bearing_to_point - bearing_to_end)) * EARTH_RADIUS
+
+
 # do a couple of tests
 if __name__ == '__main__':
     castle = Point(52.41389, -4.09098)  # aber castle
@@ -104,7 +135,14 @@ if __name__ == '__main__':
     print(hill)
 
     # distance should be ~1.29844 km
-    print(castle.distance_to(hill))
+    print('regular:', castle.distance_to(hill))
+
+    dismaland = Point(51.340911, -2.982787)
+    print('regular:', castle.distance_to(dismaland))
+
+    print('cross track:',
+          Point(52.413990, -4.089979).cross_track_distance(castle, hill))
+
     print(castle.bearing_to(hill))
 
     # should be ~90 degrees

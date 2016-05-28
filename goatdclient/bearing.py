@@ -47,6 +47,10 @@ class Bearing(object):
             difference -= 360
         return difference
 
+    @property
+    def radians(self):
+        return math.radians(self.degrees)
+
     def __float__(self):
         return self._degrees
 
