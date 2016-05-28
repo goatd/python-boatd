@@ -51,55 +51,6 @@ class Goatd(object):
         print(content)
 
 
-class LegacyGoat(object):
-    '''
-    A goat controlled by goatd. This is the legacy goat interface for backwards
-    compatibility. Deprecated.
-    '''
-
-    def __init__(self, goatd=None):
-        if goatd is None:
-            self.goatd = Goatd()
-        else:
-            self.goatd = goatd
-
-    @property
-    def heading(self):
-        '''Return the current heading of the goat in degrees'''
-        content = self.goatd.get('/goat')
-        return float(content.get('heading'))
-
-    @property
-    def wind(self):
-        '''Return the direction of the wind in degrees'''
-        content = self.goatd.get('/wind')
-        return Wind(content.get('direction'), content.get('speed'))
-
-    @property
-    def position(self):
-        '''Return a tuple in the form `(latitude, longitude)`'''
-        content = self.goatd.get('/goat')
-        return tuple(content.get('position'))
-
-    @property
-    def version(self):
-        '''Return the version of goatd'''
-        content = self.goatd.get('/')
-        return content.get('goatd').get('version')
-
-    def rudder(self, angle):
-        '''Set the angle of the rudder to be `angle` degrees'''
-        angle = float(angle)
-        request = self.goatd.post({'value': angle}, '/rudder')
-        return request.get('result')
-
-    def sail(self, angle):
-        '''Set the angle of the sail to `angle` degrees'''
-        angle = float(angle)
-        request = self.goatd.post({'value': angle}, '/sail')
-        return request.get('result')
-
-
 class ConvenienceGoat(object):
     '''A goat controlled by goatd'''
 
@@ -155,7 +106,7 @@ def Goat(convenience=False, *args, **kwargs):
     if convenience is True:
         return ConvenienceGoat(*args, **kwargs)
     else:
-        return LegacyGoat(*args, **kwargs)
+        raise ImportError
 
 
 class Behaviour(object):
