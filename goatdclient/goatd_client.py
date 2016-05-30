@@ -12,7 +12,7 @@ from .bearing import Bearing
 from .point import Point
 
 
-Wind = namedtuple('Wind', ['direction', 'speed'])
+Wind = namedtuple('Wind', ['direction', 'speed', 'relative_direction'])
 
 
 class Goatd(object):
@@ -77,10 +77,14 @@ class Goat(object):
         Return the direction of the wind in degrees.
 
         :returns: wind direction bearing
-        :rtype: Bearing
+        :rtype: Wind
         '''
         content = self.goatd.get('/wind')
-        return Wind(Bearing(content.get('direction')), content.get('speed'))
+        return Wind(
+            Bearing(content.get('direction')),
+            content.get('speed'),
+            Bearing(content.get('direction')) - self.heading
+        )
 
     @property
     def position(self):
