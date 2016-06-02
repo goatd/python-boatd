@@ -50,6 +50,12 @@ class Goatd(object):
         content = self.post({'quit': True}, '/')
         print(content)
 
+    @property
+    def version(self):
+        '''Return the version of goatd'''
+        content = self.goatd.get('/')
+        return content.get('goatd').get('version')
+
 
 class Goat(object):
     '''A goat controlled by goatd'''
@@ -97,12 +103,6 @@ class Goat(object):
         content = self.goatd.get('/goat')
         lat, lon = content.get('position')
         return Point(lat, lon)
-
-    @property
-    def version(self):
-        '''Return the version of goatd'''
-        content = self.goatd.get('/')
-        return content.get('goatd').get('version')
 
     def set_rudder(self, angle):
         '''
