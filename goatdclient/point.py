@@ -121,11 +121,12 @@ class Point(object):
         :rtype: float
         '''
 
-	dist = start_point.distance_to(self)
-	bearing_to_end = start_point.bearing_to(end_point).radians
-	bearing_to_point = start_point.bearing_to(self).radians
-	return math.asin(math.sin(dist / EARTH_RADIUS) * \
-               math.sin(bearing_to_point - bearing_to_end)) * EARTH_RADIUS
+        dist = start_point.distance_to(self)
+        bearing_to_end = start_point.bearing_to(end_point).radians
+        bearing_to_point = start_point.bearing_to(self).radians
+        return math.asin(math.sin(dist / EARTH_RADIUS) * \
+                         math.sin(bearing_to_point - bearing_to_end)) * \
+                         EARTH_RADIUS
 
 
 # do a couple of tests
