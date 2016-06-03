@@ -162,6 +162,25 @@ class Behaviour(object):
         self.start(None)
 
 
+class Waypoints(object):
+    def __init__(self, goatd=None):
+        if goatd is None:
+            self.goatd = Goatd()
+        else:
+            self.goatd = goatd
+
+    def current_waypoints(self):
+        '''
+        Get the current set of waypoints active from goatd.
+
+        :returns: The current waypoints
+        :rtype: List of Points
+        '''
+        content = self.goatd.get('/waypoints')
+        return [Point(*coords) for coords in content.get('waypoints')]
+
+
+
 if __name__ == '__main__':
     goat = Goat()
     print(goat.version)
