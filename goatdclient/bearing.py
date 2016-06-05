@@ -88,3 +88,18 @@ class Bearing(object):
 
     def __abs__(self):
         return Bearing(abs(float(self)))
+
+    def __lt__(self, other):
+        return self._degrees < float(other)
+
+    def __lt__(self, other):
+        return self._degrees < float(other)
+
+    def __gt__(self, other):
+        return self._degrees > float(other)
+
+    def __le__(self, other):
+        return self._degrees <= float(other)
+
+    def __ge__(self, other):
+        return self._degrees >= float(other)
