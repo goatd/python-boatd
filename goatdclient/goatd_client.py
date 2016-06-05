@@ -82,7 +82,7 @@ class Goat(object):
         '''
         Return the direction of the wind in degrees.
 
-        :returns: wind direction bearing
+        :returns: wind object containing direction bearing and speed
         :rtype: Wind
         '''
         content = self.goatd.get('/wind')
@@ -91,6 +91,17 @@ class Goat(object):
             content.get('speed'),
             Bearing(content.get('direction')) - self.heading
         )
+
+    @property
+    def relative_wind(self):
+        '''
+        Return the direction of the wind, relative to the goat's current
+        direction.
+
+        :returns: wind direction bearing in goat coordinates
+        :rtype: Bearing
+        '''
+        return self.wind.direction - self.heading
 
     @property
     def position(self):
