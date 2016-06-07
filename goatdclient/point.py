@@ -128,6 +128,16 @@ class Point(object):
                          math.sin(bearing_to_point - bearing_to_end)) * \
                          EARTH_RADIUS
 
+    def __add__(self, other):
+        return Point(self.lat + other.lat, self.long + other.long)
+
+    def __sub__(self, other):
+        return Point(self.lat + other.lat, self.long + other.long)
+
+    def __div__(self, other):
+        return Point(self.lat - other.lat, self.long - other.long)
+
+
 
 # do a couple of tests
 if __name__ == '__main__':
