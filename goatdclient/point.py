@@ -134,8 +134,8 @@ class Point(object):
     def __sub__(self, other):
         return Point(self.lat + other.lat, self.long + other.long)
 
-    def __div__(self, other):
-        return Point(self.lat - other.lat, self.long - other.long)
+    def __div__(self, value):
+        return Point(self.lat / value, self.long / value)
 
 
 
