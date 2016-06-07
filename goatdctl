@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     if opts.command == 'status':
         try:
-            v = goat.version
+            v = goat.goatd.version
         except Exception as e:
             print('Problem talking to goatd: "{}"'.format(e))
             sys.exit(1)
@@ -87,14 +87,14 @@ if __name__ == '__main__':
 
     if opts.command == 'rudder':
         print('setting rudder to', opts.angle)
-        goat.rudder(float(opts.angle))
+        goat.set_rudder(float(opts.angle))
 
     if opts.command == 'sail':
         print('setting sail to', opts.angle)
-        goat.sail(float(opts.angle))
+        goat.set_sail(float(opts.angle))
 
     if opts.command == 'spin':
         import time
         for i in range(90):
             a = 45 - (i)
-            goat.rudder(a)
+            goat.set_rudder(a)
