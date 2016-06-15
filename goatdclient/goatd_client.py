@@ -188,6 +188,21 @@ def get_current_waypoints(goatd=None):
     return [Point(*coords) for coords in content.get('waypoints')]
 
 
+def get_home_position(goatd=None):
+    '''
+    Get the current home position from goatd.
+
+    :returns: The configured home position
+    :rtype: Points
+    '''
+
+    if goatd is None:
+        goatd = Goatd()
+
+    content = goatd.get('/waypoints')
+    lat, lon = content.get('home', None)
+    return Point(lat, lon)
+
 
 if __name__ == '__main__':
     goat = Goat()
