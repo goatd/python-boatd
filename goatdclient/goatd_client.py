@@ -200,8 +200,12 @@ def get_home_position(goatd=None):
         goatd = Goatd()
 
     content = goatd.get('/waypoints')
-    lat, lon = content.get('home', None)
-    return Point(lat, lon)
+    home = content.get('home', None)
+    if home is not None:
+        lat, lon = home
+        return Point(lat, lon)
+    else:
+        return None
 
 
 if __name__ == '__main__':
