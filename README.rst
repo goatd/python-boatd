@@ -16,39 +16,8 @@ Installing
 
 ``$ pip install python-goatdclient``
 
-class **Goat**
-==============
+Documentation
+=============
 
-A goat controlled by goatd
-
-
-**Attributes**
-----------------
-
-``heading``:
-Return the current heading of the goat in degrees
-
-``position``:
-Return a tuple in the form ``(latitude, longitude)``
-
-``version``:
-Return the version of goatd
-
-``wind``:
-Return a tuple in the form ``(direction, speed)``. This contains the direction of the wind in degrees and the speed the wind is blowing in knots.
-
-**methods**
------------
-
-``def __init__(self, host='localhost', port=2222)``
-
-Create a goat instance, connecting to goatd at ``host`` on port ``port``
-
-``def __rudder__(self, angle)``
-
-Set the angle of the rudder to be ``angle`` degrees
-
-``def __sail__(self, angle)``
-
-Set the angle of the sail to ``angle`` degrees
-
+Documentation can be found with the rest of goatd's documentation:
+http://goatd.readthedocs.io/
