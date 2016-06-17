@@ -116,8 +116,9 @@ class Point(object):
         :param end_point: Second point on the line
         :type end_point: Point
 
-        :returns: The distance to the line between ``start_point`` and
-                  ``end_point``
+        :returns: The perpendicular distance to the line between ``start_point`` 
+                  and ``end_point``, where distance on the right of ``start_point``
+                  is positive and distance on the left is negative 
         :rtype: float
         '''
 
