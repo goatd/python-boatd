@@ -129,6 +129,26 @@ class Point(object):
                          math.sin(bearing_to_point - bearing_to_end)) * \
                          EARTH_RADIUS
 
+    def relative_point(self, bearing_to_point, distance):
+        '''
+        Return a waypoint at a location described relative to the current point
+
+        :param bearing_to_point: Relative bearing from the current waypoint
+        :param distance: Distance from the current waypoint
+        :return: The point described by the parameters
+        '''
+        target_lat = math.asin(math.sin(self.lat_radians) * math.cos(distance / EARTH_RADIUS +
+                                                                     math.cos(self.lat_radians) * math.sin(
+                                                                         distance / EARTH_RADIUS) *
+                                                                     math.cos(bearing_to_point)))
+
+        target_long = self.long_radians + math.atan2(math.sin(bearing_to_point) *
+                                                     math.sin(distance / EARTH_RADIUS) * math.cos(self.lat_radians),
+                                                     math.cos(distance / EARTH_RADIUS) - math.sin(self.lat_radians) *
+                                                     math.sin(target_lat))
+        return Point(target_lat, target_long)
+    
+
     def __add__(self, other):
         return Point(self.lat + other.lat, self.long + other.long)
 
