@@ -140,9 +140,9 @@ class Point(object):
         target_lat = math.asin(math.sin(self.lat_radians) * math.cos(distance / EARTH_RADIUS +
                                                                      math.cos(self.lat_radians) * math.sin(
                                                                          distance / EARTH_RADIUS) *
-                                                                     math.cos(bearing_to_point)))
+                                                                     math.cos(float(bearing_to_point))))
 
-        target_long = self.long_radians + math.atan2(math.sin(bearing_to_point) *
+        target_long = self.long_radians + math.atan2(math.sin(float(bearing_to_point)) *
                                                      math.sin(distance / EARTH_RADIUS) * math.cos(self.lat_radians),
                                                      math.cos(distance / EARTH_RADIUS) - math.sin(self.lat_radians) *
                                                      math.sin(target_lat))
