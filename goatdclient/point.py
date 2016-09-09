@@ -4,7 +4,7 @@ from math import cos as cos
 
 from .bearing import Bearing
 
-EARTH_RADIUS = 6371009  # in meters
+EARTH_RADIUS = 6371009.0  # in meters
 
 
 class Point(object):
