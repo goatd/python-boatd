@@ -134,9 +134,12 @@ class Point(object):
         Return a waypoint at a location described relative to the current point
 
         :param bearing_to_point: Relative bearing from the current waypoint
+        :type bearing_to_point: Bearing
         :param distance: Distance from the current waypoint
+        :type distance: float
         :return: The point described by the parameters
         '''
+
         bearing = math.radians(360 - bearing_to_point) 
         rad_distance = (distance / EARTH_RADIUS)
         lat1 = (self.lat_radians)
