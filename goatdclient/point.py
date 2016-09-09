@@ -4,7 +4,7 @@ from math import cos as cos
 
 from .bearing import Bearing
 
-EARTH_RADIUS = 6371009  # in meters
+EARTH_RADIUS = 6371009.0  # in meters
 
 
 class Point(object):
@@ -137,16 +137,14 @@ class Point(object):
         :param distance: Distance from the current waypoint
         :return: The point described by the parameters
         '''
-        target_lat = math.asin(math.sin(self.lat_radians) * math.cos(distance / EARTH_RADIUS +
-                                                                     math.cos(self.lat_radians) * math.sin(
-                                                                         distance / EARTH_RADIUS) *
-                                                                     math.cos(float(bearing_to_point))))
+        bearing = bearing_to_point.radians 
+        rad_distance = (distance / EARTH_RADIUS)
+        lat1 = (self.lat_radians)
+        lon1 = (self.long_radians)
+        lat3 = math.asin(math.sin(lat1) * math.cos(rad_distance) + math.cos(lat1) * math.sin(rad_distance) * math.cos(bearing))
+        lon3 = lon1 + math.atan2(math.sin(bearing) * math.sin(rad_distance) * math.cos(lat1) , math.cos(rad_distance) - math.sin(lat1) * math.sin(lat3))
 
-        target_long = self.long_radians + math.atan2(math.sin(float(bearing_to_point)) *
-                                                     math.sin(distance / EARTH_RADIUS) * math.cos(self.lat_radians),
-                                                     math.cos(distance / EARTH_RADIUS) - math.sin(self.lat_radians) *
-                                                     math.sin(target_lat))
-        return Point(target_lat, target_long)
+        return Point(math.degrees(lat3), math.degrees(lon3))
     
 
     def __add__(self, other):
