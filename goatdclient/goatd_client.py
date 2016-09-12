@@ -6,6 +6,7 @@ except ImportError:
     from urllib2 import urlopen, Request
 
 from collections import namedtuple
+from functools import wraps
 import json
 
 from .bearing import Bearing
@@ -60,13 +61,28 @@ class Goatd(object):
 class Goat(object):
     '''A goat controlled by goatd'''
 
-    def __init__(self, goatd=None):
+    def __init__(self, goatd=None, auto_update=True):
         if goatd is None:
             self.goatd = Goatd()
         else:
             self.goatd = goatd
 
+        self.auto_update = auto_update
+        self._cached_goat = {}
+
+    def _auto_update(f):
+        @wraps(f)
+        def dec(self) :
+            if self.auto_update:
+                self.update()
+            return f(self)
+        return dec
+
+    def update(self):
+        self._cached_goat = self.goatd.get('/goat')
+
     @property
+    @_auto_update
     def heading(self):
         '''
         Return the current heading of the goat in degrees.
@@ -74,10 +90,11 @@ class Goat(object):
         :returns: current bearing
         :rtype: Bearing
         '''
-        content = self.goatd.get('/goat')
+        content = self._cached_goat
         return Bearing(float(content.get('heading')))
 
     @property
+    @_auto_update
     def wind(self):
         '''
         Return the direction of the wind in degrees.
@@ -85,7 +102,7 @@ class Goat(object):
         :returns: wind object containing direction bearing and speed
         :rtype: Wind
         '''
-        content = self.goatd.get('/wind')
+        content = self._cached_goat.get('wind')
         return Wind(
             Bearing(content.get('direction')),
             content.get('speed'),
@@ -104,6 +121,7 @@ class Goat(object):
         return self.wind.direction
 
     @property
+    @_auto_update
     def position(self):
         '''
         Return the current position of the goat.
@@ -111,7 +129,7 @@ class Goat(object):
         :returns: current position
         :rtype: Point
         '''
-        content = self.goatd.get('/goat')
+        content = self._cached_goat
         lat, lon = content.get('position')
         return Point(lat, lon)
 
