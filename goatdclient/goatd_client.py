@@ -54,7 +54,7 @@ class Goatd(object):
     @property
     def version(self):
         '''Return the version of goatd'''
-        content = self.goatd.get('/')
+        content = self.get('/')
         return content.get('goatd').get('version')
 
 
