@@ -59,7 +59,11 @@ class Goatd(object):
 
 
 class Goat(object):
-    '''A goat controlled by goatd'''
+    '''
+    A goat controlled by goatd
+    
+    :param auto_update: automatically update properties when they are requested.
+    '''
 
     def __init__(self, goatd=None, auto_update=True):
         if goatd is None:
