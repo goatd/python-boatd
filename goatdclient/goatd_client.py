@@ -13,7 +13,7 @@ from .bearing import Bearing
 from .point import Point
 
 
-Wind = namedtuple('Wind', ['direction', 'speed', 'relative_direction'])
+Wind = namedtuple('Wind', ['absolute', 'speed', 'apparent'])
 
 
 class Goatd(object):
@@ -108,21 +108,10 @@ class Goat(object):
         '''
         content = self._cached_goat.get('wind')
         return Wind(
-            Bearing(content.get('direction')),
+            Bearing(content.get('absolute')),
             content.get('speed'),
-            Bearing(content.get('direction')) + self.heading
+            Bearing(content.get('apparent'))
         )
-
-    @property
-    def relative_wind(self):
-        '''
-        Return the direction of the wind, relative to the goat's current
-        direction.
-
-        :returns: wind direction bearing in goat coordinates
-        :rtype: Bearing
-        '''
-        return self.wind.direction
 
     @property
     @_auto_update
