@@ -40,6 +40,18 @@ class Bearing(object):
         Return the error between this and another bearing. This will be an
         angle in degrees, positive or negative depending on the direction of
         the error.
+        
+            self   other
+              \      /
+               \    /
+                \__/
+                 \/ <- angle will be +ve
+
+            other   self
+              \      /
+               \    /
+                \__/
+                 \/ <- angle will be -ve        
 
         :param other: bearing to compare to
         :type other: Bearing
