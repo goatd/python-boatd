@@ -137,6 +137,18 @@ class Goat(object):
         request = self.goatd.post({'value': float(angle)}, '/rudder')
         return request.get('result')
 
+    @property
+    @_auto_update
+    def target_rudder_angle(self):
+        '''
+        Return the current target rudder angle in degrees.
+
+        :returns: rudder angle
+        :rtype: float
+        '''
+        content = self._cached_goat
+        return float(content.get('rudder_angle'))
+
     def set_sail(self, angle):
         '''
         Set the angle of the sail to `angle` degrees
@@ -147,6 +159,18 @@ class Goat(object):
         angle = float(angle)
         request = self.goatd.post({'value': float(angle)}, '/sail')
         return request.get('result')
+
+    @property
+    @_auto_update
+    def target_sail_angle(self):
+        '''
+        Return the current target sail angle in degrees.
+
+        :returns: sail angle
+        :rtype: float
+        '''
+        content = self._cached_goat
+        return float(content.get('sail_angle'))
 
 
 class Behaviour(object):
