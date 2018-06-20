@@ -20,10 +20,16 @@ import argparse
 import sys
 
 from goatdclient import Goat
+from goatdclient import Goatd
 from goatdclient import Behaviour
 
 if __name__ == '__main__':
     arger = argparse.ArgumentParser()
+    arger.add_argument('--host', default='localhost',
+                        help='host goatd is listening on')
+    arger.add_argument('--port', type=int, default=2222,
+                        help='port goatd is listening on')
+
     subparsers = arger.add_subparsers(dest='command')
 
     help_parser = subparsers.add_parser('help')
@@ -47,7 +53,8 @@ if __name__ == '__main__':
 
     opts = arger.parse_args()
 
-    goat = Goat()
+    goatd = Goatd(host=opts.host, port=opts.port)
+    goat = Goat(goatd=goatd)
 
     if opts.command == 'help':
         print(__doc__)
