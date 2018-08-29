@@ -34,7 +34,7 @@ class Point(object):
 
     def __str__(self):
         '''Return a string representation of the point'''
-        return '{0:0.2f}N, {1:0.2f}W'.format(*list(self))
+        return '{0:0.5f}N, {1:0.5f}W'.format(*list(self))
 
     def __repr__(self):
         return '<{0}.{1} ({2}) object at {3}>'.format(
